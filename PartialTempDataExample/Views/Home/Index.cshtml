@@ -1,0 +1,24 @@
+﻿@{
+    var searchTerm = "test";
+    searchTerm = ViewBag.searchTerm;
+}
+
+<div id="partial">
+    @Html.Partial("ShowPartial", searchTerm)
+</div>
+<div>
+    <button id="load">Load</button>
+</div>
+
+<script>
+    document.querySelector('#load').addEventListener('click', () => {
+        fetch('/Home/ShowPartial?searchTerm=NewTest')
+            .then((response) => {
+                return response.text();
+            })
+            .then((result) => {
+                document.querySelector('#partial').innerHTML = result;
+            });
+    });
+
+</script>
